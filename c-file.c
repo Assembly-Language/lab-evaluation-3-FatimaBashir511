@@ -1,35 +1,17 @@
-
 #include <stdio.h>
-
-
-//extern "C" void __stdcall asmfunc(void);
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void __stdcall asmfunc(int p1 ,int p2);
-
-#ifdef __cplusplus
+void countZeros(int arr[], int size) {
+    int count = 0; 
+    for (int i = 0; i < size; i++) { 
+        if (arr[i] == 0) {
+            count++;
+        }
+    }
+    printf("Total zero in the array: %d\n", count);
 }
-#endif
-
-
 int main() {
-    system("cls");
-    int abc;
-    printf("assembly proc calling from  from C! \n");
-getch();
-
-    
-    asmfunc(3,5); //assembly proc calling
-   
-   getch();
-    
-    
-    printf("back to  C! \n"); // printing in c
-    
-  
-    
-    return 0;
+    int array[]={3,5,0,6,0};
+    int size = sizeof(array) / sizeof(array[0]);
+    countZeros(array, size);
+    totalzero();
+    return 0; 
 }

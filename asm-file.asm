@@ -1,27 +1,29 @@
-
-
-INCLUDE Irvine32.inc
-.data
-;public asmfunc
-msg db "assebly procedure end now",0
-
-
+include Irvine32.inc
 .code
-asmfunc PROC p1:DWORD, p2:DWORD
-    
-    push ebp
-    mov ebp,esp
-    mov eax, [ebp+12
-\] ; Move the first parameter into EAX
-    call writedec
-    call crlf
-    ;add eax, p2 ; Add the second parameter to EAX
-    call writedec
-    call crlf
-    mov edx, offset msg
-    call writestring
-    call crlf
-    
-    ret
-asmfunc ENDP
-end
+countZeros PROC
+    mov eax, 0               
+check_loop:                  
+    cmp dword ptr [esi], 0    
+    jne not_zero             
+    inc eax                   
+not_zero:
+    add esi, 4                
+    loop check_loop         
+    ret                       
+countZeros ENDP
+main PROC
+    push 5                   
+    push 0                    
+    push 3                   
+    push 0                    
+    push 5                    
+    push 0                   
+    mov esi, offset array              ; Load the address of the array into ESI
+    mov ecx, 6                
+    call countZeros           ; Call the procedure to count zeros
+    ; Display 
+    call WriteDec             
+    call Crlf                
+    exit                      
+main ENDP
+END main                      
